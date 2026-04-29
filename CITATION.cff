@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "Si utilizas este código, cita el libro asociado y este repositorio."
+title: "Código fuente: Control Automático y de Procesos Industriales"
+type: software
+version: "1.0.0"
+date-released: "2026-04-29"
+authors:
+  - family-names: "Plaza Merino"
+    given-names: "Pedro"
+    email: "pplaza@plazarobotica.es"
+    affiliation: "Plaza Robótica · Siemens Mobility · UNIR"
+keywords:
+  - control automático
+  - procesos industriales
+  - PID
+  - MPC
+  - control digital
+  - gemelos digitales
+  - machine learning industrial
+  - Python
+  - MATLAB
+  - Octave
+license: BSD-3-Clause
+url: "https://github.com/<usuario>/control-automatico-procesos-industriales-codigo"
+preferred-citation:
+  type: book
+  authors:
+    - family-names: "Plaza Merino"
+      given-names: "Pedro"
+  title: "Control Automático y de Procesos Industriales: Fundamentos, criterio y casos industriales didácticos con Python"
+  year: 2026
+  publisher:
+    name: "Independiente / Amazon KDP"

@@ -1,0 +1,74 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# === Entornos ===
+.venv/
+venv/
+env/
+.env
+.conda/
+
+# === Sistema ===
+.DS_Store
+Thumbs.db
+
+# === Build / dist ===
+build/
+dist/
+outputs/
+exports/
+
+# === Editorial / KDP / publicación ===
+# Office, PDFs y paquetes editoriales NO deben entrar en este repositorio de código.
+*.docx
+*.doc
+*.pdf
+*.zip
+*.bundle
+*.patch
+*.tmp
+*.bak
+~$*
+
+# Patrones de naming editorial
+*Lote*
+*lote*
+*KDP*
+*kdp*
+*manuscrito*
+*Manuscrito*
+*revision*
+*revisión*
+*auditoria*
+*auditoría*
+*contraportada*
+*metadatos*
+*briefing*
+*checklist*
+*paquete*
+*Paquete*
+*proof*
+*Print_interior*
+*print_interior*
+*Kindle_reflow*
+*kindle_reflow*
+
+# Carpetas numeradas editoriales en raíz
+/01_*
+/02_*
+/03_*
+/04_*
+/05_*
+/06_*
+/07_*
+/08_*
+/09_*
+
+# Notebooks ejecutados temporales fuera de carpetas controladas
+/tmp_notebooks/

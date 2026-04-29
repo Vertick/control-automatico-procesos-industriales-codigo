@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "lote-*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Tests + smoke notebooks
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies (no opcionales)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run pytest
+        env:
+          MPLBACKEND: Agg
+        run: pytest tests/ -v --tb=short
+
+      - name: Smoke-execute notebooks (subset reproducible)
+        env:
+          MPLBACKEND: Agg
+        run: |
+          set -e
+          python -m pip install nbformat nbclient
+          python - <<'PY'
+          import os, sys, glob
+          import nbformat
+          from nbclient import NotebookClient
+          from pathlib import Path
+          os.environ['MPLBACKEND'] = 'Agg'
+
+          subset = [
+              "python/cap01/C01_E01_lazo_abierto_cerrado.ipynb",
+              "python/cap05/C05_E01_curve_fit_fopdt.ipynb",
+              "python/cap05/C05_E02_sensibilidades_S_T.ipynb",
+              "python/cap06/C06_E01_bode_nyquist_margenes.ipynb",
+              "python/cap09/C09_E01_pid_antiwindup.ipynb",
+              "python/cap10/C10_E01_sintonias_zn_lambda_simc.ipynb",
+              "python/cap12/C12_E03_mpc_minimo.ipynb",
+              "python/cap13/C13_E02_str_rls.ipynb",
+              "python/cap14/C14_E02_mqtt_demo.ipynb",
+              "python/cap15/C15_E01_cusum_drift.ipynb",
+              "python/cap16/C16_E03_anomalias_isolation_forest.ipynb",
+          ]
+          fail = 0
+          for nb_path in subset:
+              print(f"::group::{nb_path}", flush=True)
+              nb = nbformat.read(nb_path, as_version=4)
+              client = NotebookClient(nb, timeout=180, kernel_name='python3',
+                                      resources={'metadata': {'path': str(Path(nb_path).parent)}})
+              try:
+                  client.execute()
+                  print(f"OK  {nb_path}")
+              except Exception as e:
+                  fail += 1
+                  print(f"FAIL {nb_path}: {e}")
+              print("::endgroup::")
+          if fail:
+              sys.exit(f"{fail} notebooks fallaron")
+          PY
+
+  lint:
+    name: Lint YAML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install pyyaml
+      - run: |
+          python -c "import yaml; yaml.safe_load(open('environment.yml'))"
+          python -c "import yaml; yaml.safe_load(open('.github/workflows/ci.yml'))"

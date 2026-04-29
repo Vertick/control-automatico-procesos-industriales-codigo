@@ -1,0 +1,33 @@
+# Control Automático y de Procesos Industriales — dependencias Python
+# Versión Python objetivo: 3.10+
+
+# === Núcleo (obligatorio) ===
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+sympy>=1.12
+
+# === Control (obligatorio) ===
+control>=0.10
+
+# === ML (obligatorio para C15-C16) ===
+scikit-learn>=1.3
+
+# === Notebooks (obligatorio) ===
+jupyterlab>=4.0
+ipykernel>=6.25
+ipywidgets>=8.0
+nbformat>=5.9
+nbclient>=0.8
+
+# === Testing (obligatorio para CI) ===
+pytest>=7.4
+
+# === Opcionales ===
+# cvxpy NO se requiere: el ejemplo C12_E03 usa scipy.optimize.minimize.
+# Si el lector quiere reformular el MPC con cvxpy, instalar manualmente:
+#     pip install "cvxpy>=1.4"
+#
+# paho-mqtt NO se requiere: el notebook C14_E02 funciona en modo mock.
+# Si el lector quiere conectar a un broker MQTT real, instalar manualmente:
+#     pip install "paho-mqtt>=1.6"

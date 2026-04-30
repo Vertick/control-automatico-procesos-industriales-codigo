@@ -136,7 +136,7 @@ Ver `LICENSE` para el texto completo.
 Ver `CITATION.cff`. Cita sugerida:
 
 > Plaza Merino, P. (2026). *Control Automático y de Procesos Industriales: Fundamentos, criterio y casos industriales didácticos con Python.*
-> Repositorio de código: https://github.com/<usuario>/control-automatico-procesos-industriales-codigo
+> Repositorio de código: https://github.com/Vertick/control-automatico-procesos-industriales-codigo
 
 ## Estado
 
